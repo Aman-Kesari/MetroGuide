@@ -1,237 +1,179 @@
-🧑‍💻 Metro Route Optimization System
+# 🧑‍💻 Metro Route Optimization System
 
+A full-stack web application to find the **shortest path** and **minimum interchanges** in a metro system based on user input. It integrates a C++-based route optimization algorithm with a modern web interface.
 
-🌟 Overview
+---
 
+## 🌟 Overview
 
-The Metro Route Optimization System is a web application designed to find the shortest path and minimize interchanges in a metro system based on user input. It allows users to input the source and destination stations, and it calculates the shortest route with the minimum number of interchanges.
+The Metro Route Optimization System allows users to input a **source** and **destination** metro station and calculates:
+- The **shortest travel time**
+- The **minimum number of interchanges**
+- A **detailed route** with metro line colors
 
-✨ Features
+---
 
+## ✨ Features
 
-General Features
-Input Form: Allows users to specify source and destination stations.
+### General Features
+- 🔍 **Input Form** – Specify source and destination stations
+- ⚙️ **Backend Processing** – Generates input files and executes C++ logic for route optimization
+- 📈 **Result Display** – Shows shortest time, interchange count, and full station list with line color
 
+### Additional Features
+- 💬 **Live Feedback** – Real-time route computation and dynamic display
+- 🧭 **Interactive Output** – Station-wise route and metro line visualization
 
-Backend Processing: The system processes input, generates input files, and executes C++ code for route optimization.
+---
 
+## 🛠️ Technology Stack
 
-Route Information: Displays the shortest time, minimum interchanges, and a detailed station list with line color.
+### 🎨 Frontend
+- React.js
+- HTML, CSS, JavaScript
 
+### 🧰 Backend
+- Node.js
+- Express.js
+- C++ (for route optimization algorithm)
+- Docker (for safe, isolated execution)
 
-Additional Features
+### ☁️ Hosting
+- AWS / Google Cloud (optional for deployment)
 
+---
 
-Live Feedback: Users receive immediate feedback with results shown dynamically.
+## 📊 Database & File Handling
 
+### 📁 File Structure
 
-Interactive Output: Detailed path output including each station along the route and the color of the metro line.
+#### Input Files
+- Generated based on user input.
+- Passed into the C++ module for processing.
 
+#### Output Files
+- Created after C++ execution.
+- Used to display results in the frontend.
 
-🛠️ Technology Stack
+---
 
+## 🧩 Architecture
 
-Frontend
+### 🧱 Microservices-Based
 
+#### 🔧 Backend Service
+- Handles route computation via C++ execution
+- Manages file generation and safe runtime environment
 
-React.js
+#### 🎨 Frontend Service
+- React-based UI for taking user input and showing output
+- Sends and receives API requests via Express.js
 
+### 🔐 Security
+- **Execution Isolation** – Uses Docker containers to sandbox C++ execution
+- **Input Validation** – Ensures only valid inputs are processed
 
-HTML, CSS, JavaScript
+---
 
+## 🚀 Installation
 
-Backend
+### 📋 Prerequisites
+- Node.js
+- C++ compiler (e.g., `g++`)
+- Docker (optional but recommended)
 
+### 🪜 Steps
 
-Node.js
+```bash
+# Clone the Repository
+git clone https://github.com/Aman-Kesari/MetroGuide
 
+# Install Backend Dependencies
+npm install
 
-Express.js
+# Start the Backend Server
+npm start
 
+# Run the Frontend
+npm run dev
+## 🏆 Future Enhancements
 
-C++ (for route optimization algorithm)
+- 🔁 **Support for multiple metro networks or cities**
+- 💡 **Save favorite or frequent routes**
+- 🌐 **Improve UI/UX** for better usability and accessibility
+- 📲 **Build a mobile version** using React Native for cross-platform support
 
+---
 
-Docker (for isolated code execution)
+## 🤝 Contributions
 
+Contributions are welcome! Help us make the Metro Route Optimization System better:
 
-Hosting
+1. 🍴 Fork the repository  
+2. 🌿 Create a new feature branch  
+3. 🛠️ Make your changes  
+4. 📩 Submit a pull request for review
 
+---
 
-AWS / Google Cloud
+## 📬 Contact
 
+📧 Reach out at: **amankesari803@gmail.com**  
+For queries, suggestions, or collaboration opportunities.
 
-📊 Database Design
+---
 
+## 📝 Example C++ Code
 
-Files Structure
+Below is a simplified snippet of the C++ algorithm used for route optimization:
 
-
-Input Files
-
-
-The backend generates dynamic input files based on user input, which are then used by the C++ code for optimization.
-Output Files
-
-
-Output files are generated after the execution of the C++ code, which contains the results of the route optimization.
-
-
-🧩 Architecture
-
-
-Microservices
-
-
-Backend Service:
-
-
-Handles POST requests to run the route optimization using C++.
-
-
-Manages file generation and execution of the C++ code.
-
-
-Frontend Service:
-
-
-User interface to input source and destination stations and display results.
-
-
-Security
-
-
-Execution Isolation: Code execution happens in isolated environments using Docker to ensure safety.
-
-
-Input Validation: Prevents invalid input from breaking the system.
-
-
-🚀 Installation
-
-
-Prerequisites
-
-
-Node.js
-
-
-C++ Compiler (g++)
-
-
-Docker (for isolated code execution)
-
-
-Steps
-
-
-Clone the Repository:
-
-
-git clone https://github.com/Aman-Kesari/MetroGuide 
-
-
-Install Backend Dependencies:
-
-
-npm install  
-
-
-Start the Backend Server:
-
-
-npm start  
-
-  
-Run the Frontend:
-
-
-npm run dev 
-
-
-🏆 Future Enhancements
-
-
-Add support for more metro lines and cities.
-
-
-Improve the user interface for better user experience.
-
-
-Allow users to save favorite routes for quick access.
-
-
-🤝 Contributions
-
-
-Contributions are welcome!
-
-
-Fork the repository.
-
-
-Create a new branch.
-
-
-Submit a pull request with your changes.
-
-
-📬 Contact
-
-
-For queries or feedback, reach out at amankesari803@gmail.com.
-
-
-📝 Example C++ Code
-
-
-Here’s an example of the C++ code used for route optimization:
-
-
+```cpp
 unordered_map<string, unordered_map<string, pair<int, string>>> adjList;
+
 void addEdge(string s1, string s2, int tm, string color) {
-    adjList[s1].insert(make_pair(s2, make_pair(tm, color)));
-    adjList[s2].insert(make_pair(s1, make_pair(tm, color)));
+    adjList[s1][s2] = {tm, color};
+    adjList[s2][s1] = {tm, color};
 }
+
 void shortestPathWithMinInterchange(string src, string dest) {
-    // Priority queue to store (interchanges, time, station, previous color)
     typedef tuple<int, int, string, string> Node;
     priority_queue<Node, vector<Node>, greater<Node>> pq;
-    pq.push(make_tuple(0, 0, src, ""));
-    // Map to store the shortest time to reach each station and the minimum interchanges
+    pq.push({0, 0, src, ""});
+
     unordered_map<string, pair<int, int>> dist;
-    unordered_map<string, pair<string, string>> parent; // To track the path and color
-    for (auto node : adjList) {
+    unordered_map<string, pair<string, string>> parent;
+
+    for (auto& node : adjList) {
         dist[node.first] = {INT_MAX, INT_MAX};
         parent[node.first] = {"", ""};
     }
+
     dist[src] = {0, 0};
+
     while (!pq.empty()) {
-        Node current = pq.top();
+        auto [curInterchanges, curTime, curStation, prevColor] = pq.top();
         pq.pop();
-        int curInterchanges = get<0>(current);
-        int curTime = get<1>(current);
-        string curStation = get<2>(current);
-        string prevColor = get<3>(current);
+
         if (curStation == dest) {
             cout << "Shortest time: " << curTime << endl;
             cout << "Minimum interchanges: " << curInterchanges << endl;
-            cout << "Path: " << endl;
-            printPath(parent, dest);
+            // Print path logic here
             return;
         }
-        for (auto nbr : adjList[curStation]) {
-            string nextStation = nbr.first;
-            int travelTime = nbr.second.first;
-            string color = nbr.second.second;
+
+        for (auto& [nextStation, info] : adjList[curStation]) {
+            auto [travelTime, color] = info;
             int newInterchanges = curInterchanges + (prevColor != "" && prevColor != color);
             int newTime = curTime + travelTime;
-            if (newInterchanges < dist[nextStation].second || (newInterchanges == dist[nextStation].second && newTime < dist[nextStation].first)) {
+
+            if (newInterchanges < dist[nextStation].second ||
+               (newInterchanges == dist[nextStation].second && newTime < dist[nextStation].first)) {
                 dist[nextStation] = {newTime, newInterchanges};
-                parent[nextStation] = {curStation, color}; // Track the path and color
-                pq.push(make_tuple(newInterchanges, newTime, nextStation, color));
+                parent[nextStation] = {curStation, color};
+                pq.push({newInterchanges, newTime, nextStation, color});
             }
         }
     }
+
     cout << "Destination not reachable from source" << endl;
 }
