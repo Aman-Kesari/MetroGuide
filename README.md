@@ -128,8 +128,7 @@ Steps
 Clone the Repository:
 
 
-git clone https://github.com/your-username/metro-route-optimization.git  
-cd metro-route-optimization  
+git clone https://github.com/Aman-Kesari/MetroGuide 
 
 
 Install Backend Dependencies:
